@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.dto.request.ProductFilterDTO;
 import com.example.demo.model.dto.request.ProductSaveDTO;
 import com.example.demo.model.dto.response.CommonResponseDTO;
 import com.example.demo.model.dto.response.ContentResponseDTO;
@@ -17,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -41,12 +41,10 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new CommonResponseDTO(HttpStatus.CREATED.value(), Created.PRODUCT_CREATED));
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Page<ProductResponseDTO>> getProductsFiltered(@RequestParam(name = "name", required = false) String name,
-            @RequestParam(name = "productCategoryId", required = false) Integer productCategoryId,
-            @RequestParam(name = "price", required = false) BigDecimal price, Pageable pageable) {
-        log.info("End point:- Get products");
-        Page<ProductResponseDTO> productResponses = productService.getProductsFiltered(name, productCategoryId, price, pageable);
+    @PostMapping(path = "/search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Page<ProductResponseDTO>> searchProducts(@RequestBody ProductFilterDTO productFilterDTO, Pageable pageable) {
+        log.info("End point:- Filter products");
+        Page<ProductResponseDTO> productResponses = productService.getProductsFiltered(productFilterDTO, pageable);
         return ResponseEntity.ok(productResponses);
     }
 

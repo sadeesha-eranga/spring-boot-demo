@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.exception.CustomServiceException;
+import com.example.demo.model.dto.request.ProductFilterDTO;
 import com.example.demo.model.dto.request.ProductSaveDTO;
 import com.example.demo.model.dto.response.ProductCategoryResponseDTO;
 import com.example.demo.model.dto.response.ProductCommentResponseDTO;
@@ -24,7 +25,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -75,8 +75,9 @@ public class ProductServiceImpl implements ProductService {
      * @return gets the products filtered by given params
      */
     @Override
-    public Page<ProductResponseDTO> getProductsFiltered(String name, Integer productCategoryId, BigDecimal price, Pageable pageable) {
-        return productRepository.findAllBySearchValue(name, productCategoryId, price, pageable).map(this::getProductResponse);
+    public Page<ProductResponseDTO> getProductsFiltered(ProductFilterDTO productFilterDTO, Pageable pageable) {
+        return productRepository.findAllBySearchValue(productFilterDTO.getName(), productFilterDTO.getProductCategoryId(),
+                productFilterDTO.getPrice(), productFilterDTO.getComment(), pageable).map(this::getProductResponse);
     }
 
     /**
