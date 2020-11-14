@@ -56,6 +56,13 @@ public class ProductController {
         return ResponseEntity.ok(new CommonResponseDTO(HttpStatus.OK.value(), Created.PRODUCT_DELETED));
     }
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Page<ProductResponseDTO>> getAllProducts(Pageable pageable) {
+        log.info("End point:- Get all products");
+        Page<ProductResponseDTO> products = productService.getAllProducts(pageable);
+        return ResponseEntity.ok(products);
+    }
+
     @GetMapping(path = "/categories", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ContentResponseDTO<List<ProductCategoryResponseDTO>>> getProductCategories() {
         log.info("End point:- Get product categories");

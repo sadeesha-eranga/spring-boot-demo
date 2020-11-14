@@ -98,6 +98,11 @@ public class ProductServiceImpl implements ProductService {
         return productCategoryRepository.findAll().stream().map(this::getCategoryResponse).collect(Collectors.toList());
     }
 
+    @Override
+    public Page<ProductResponseDTO> getAllProducts(Pageable pageable) {
+        return productRepository.findAllByStatus(Detail.PRODUCT_ACTIVE, pageable).map(this::getProductResponse);
+    }
+
     /**
      * @param categoryId the category id to search
      * @return the product for the given id

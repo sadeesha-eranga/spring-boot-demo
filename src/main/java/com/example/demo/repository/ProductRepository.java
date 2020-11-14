@@ -37,4 +37,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
                     "AND (:comment IS NULL OR pcm.comment LIKE %:comment%) ")
     Page<Product> findAllBySearchValue(@Param("name") String name, @Param("productCategoryId") Integer productCategoryId,
                                        @Param("price") BigDecimal price, @Param("comment") String comment, Pageable pageable);
+
+    Page<Product> findAllByStatus(char status, Pageable pageable);
 }

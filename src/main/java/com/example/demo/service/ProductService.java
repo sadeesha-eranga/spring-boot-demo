@@ -23,4 +23,6 @@ public interface ProductService {
     void deleteProduct(int productId);
 
     List<ProductCategoryResponseDTO> getProductCategories();
+
+    Page<ProductResponseDTO> getAllProducts(Pageable pageable);
 }

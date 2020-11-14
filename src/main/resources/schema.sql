@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS `product_comment`;
+DROP TABLE IF EXISTS `product`;
+DROP TABLE IF EXISTS `product_category`;
 CREATE TABLE `product_category`  (
     `product_category_id` INT(11) NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(100),
