@@ -58,7 +58,7 @@ public class ProductController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Page<ProductResponseDTO>> getAllProducts(Pageable pageable) {
-        log.info("End point:- Get all products");
+        log.info("End point:- Get all products: {}", pageable);
         Page<ProductResponseDTO> products = productService.getAllProducts(pageable);
         return ResponseEntity.ok(products);
     }

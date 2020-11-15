@@ -21,6 +21,6 @@ public class ProductFilterDTO {
     private String name;
     @Min(0)
     private BigDecimal price;
-    private int productCategoryId;
+    private Integer productCategoryId;
     private String comment;
 }
