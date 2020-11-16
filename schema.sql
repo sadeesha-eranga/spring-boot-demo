@@ -1,6 +1,3 @@
-CREATE DATABASE spring_boot_demo_db;
-USE spring_boot_demo_db;
-
 CREATE TABLE `product_category`  (
     `product_category_id` INT(11) NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(100),
@@ -29,6 +26,3 @@ CREATE TABLE `product_comment`  (
     PRIMARY KEY (`product_comment_id`) ,
     CONSTRAINT `fk_product_id` FOREIGN KEY (`product_product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci;
-
-INSERT INTO `product_category`(name, description) VALUES ('Test Product Category', 'This is a product category');
-INSERT INTO `product_category`(name, description) VALUES ('Second Product Category', 'This is a product category');
